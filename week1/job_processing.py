@@ -11,17 +11,27 @@ def read_jobs(raw_data, job_list):
         # read the raw data and 
         for job_data in data_content.readlines():
             job_details = job_data.rsplit(" ")
-            job_list.append(job(job_details[0], job_details[1]))
+            job_list.append(Job(job_details[0], job_details[1]))
 
 class Job:
 
     def __init__(self, weight, length):
-        self.weight = weight
-        self.length = length
-        self.ratio = weight / length
+        self.weight = int(weight)
+        self.length = int(length)
+        self.ratio = self.weight / self.length
+
+    def __repr__(self):
+        return "job detail: weight is %s, length is %s, ration of weight/length %s" % (self.weight, self.length, self.ratio) 
+    def __str__(self):
+        return "%s %s %s" % (self.weight, self.length, self.ratio)
+
 
 if __name__ == '__main__':
     # the job list
     job_list = []
     # create job list from the raw data
+    print("Start reading the raw data......")
     read_jobs('jobs.txt', job_list)
+
+    print("Finish reading the raw data......")
+    print("The size of the job list %s " % len(job_list))
