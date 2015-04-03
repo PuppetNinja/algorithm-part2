@@ -20,10 +20,8 @@ class Job:
         self.length = int(length)
         self.ratio = self.weight / self.length
     def __repr__(self):
-        return "job detail: weight is: %s, length is: %s, amount of (weight - length): %s, ratio of weight/length: %s" %
+        return "job detail: weight is: %s, length is: %s, amount of (weight - length): %s, ratio of weight/length: %s" % \
             (self.weight, self.length, self.weight - self.length, self.ratio)
-    def __str__(self):
-        return "%s %s %s" % (self.weight, self.length, self.ratio)
 
 if __name__ == '__main__':
     # the job list
@@ -33,8 +31,28 @@ if __name__ == '__main__':
     read_jobs('jobs.txt', job_list)
 
     print("Finish reading the raw data......")
+    job_list_sort_by_weight_length_diff=sorted(job_list, key=lambda job: (job.weight - job.length, job.weight), reverse=True)
     print("Sort the jobs with decreasing order of (weight - length)")
-     
     print("*******************************************")
     print(" Greedy Scheduling using (weight - length) ")
     print("*******************************************")
+    job_completion_time = 0
+    job_weighted_completion_time = 0
+    for job in job_list_sort_by_weight_length_diff:
+        job_completion_time += job.length
+        job_weighted_completion_time += job_completion_time * job.weight
+
+    print("Weighted completion time: %s " % job_weighted_completion_time)
+    print("")
+    job_list_sort_by_weight_length_ratio=sorted(job_list, key=lambda job: (job.weight/job.length), reverse=True)
+    print("Sort the jobs with decreasing order of weight/length ration")
+    print("*******************************************")
+    print(" Greedy Scheduling using weight/length ")
+    print("*******************************************")
+    job_completion_time = 0
+    job_weighted_completion_time = 0
+    for job in job_list_sort_by_weight_length_ratio:
+        job_completion_time += job.length
+        job_weighted_completion_time  += job_completion_time * job.weight
+
+    print("Weighted completion time: %s " % job_weighted_completion_time)
