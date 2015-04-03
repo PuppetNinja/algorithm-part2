@@ -19,12 +19,11 @@ class Job:
         self.weight = int(weight)
         self.length = int(length)
         self.ratio = self.weight / self.length
-
     def __repr__(self):
-        return "job detail: weight is %s, length is %s, ration of weight/length %s" % (self.weight, self.length, self.ratio) 
+        return "job detail: weight is: %s, length is: %s, amount of (weight - length): %s, ratio of weight/length: %s" %
+            (self.weight, self.length, self.weight - self.length, self.ratio)
     def __str__(self):
         return "%s %s %s" % (self.weight, self.length, self.ratio)
-
 
 if __name__ == '__main__':
     # the job list
@@ -34,4 +33,8 @@ if __name__ == '__main__':
     read_jobs('jobs.txt', job_list)
 
     print("Finish reading the raw data......")
-    print("The size of the job list %s " % len(job_list))
+    print("Sort the jobs with decreasing order of (weight - length)")
+     
+    print("*******************************************")
+    print(" Greedy Scheduling using (weight - length) ")
+    print("*******************************************")
